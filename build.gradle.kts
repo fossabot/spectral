@@ -1,14 +1,49 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version Project.kotlinVersion
+    detekt
 }
 
-group = "org.spectral"
-version = "1.0.0"
-
-repositories {
-    mavenCentral()
+tasks.withType<Wrapper> {
+    gradleVersion = Project.gradleVersion
 }
 
-dependencies {
-    implementation(kotlin("stdlib"))
+allprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+
+    group = "org.spectral"
+    version = Project.version
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        implementation(kotlin("stdlib"))
+        implementation(kotlin("reflect"))
+
+        implementation(Library.tinylogApi)
+        implementation(Library.tinylogImpl)
+
+        /*
+         * Testing Dependencies
+         */
+        testImplementation(kotlin("test"))
+        testImplementation(Library.spekDsl)
+        testImplementation(Library.mockk)
+        testRuntimeOnly(Library.spekRunner)
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform {
+            includeEngines("spek2")
+        }
+    }
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = Project.jvmVersion
+    }
 }
