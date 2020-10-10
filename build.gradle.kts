@@ -33,6 +33,7 @@ allprojects {
          */
         testImplementation(kotlin("test"))
         testImplementation(Library.spekDsl)
+        testImplementation(Library.mockk)
         testRuntimeOnly(Library.spekRunner)
     }
 

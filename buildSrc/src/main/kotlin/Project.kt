@@ -41,6 +41,7 @@ object Library {
         const val dagger = "2.29.1"
         const val glassfish = "3.1.1"
         const val spek = "2.0.13"
+        const val mockk = "1.10.2"
         const val clikt = "2.8.0"
     }
 
@@ -51,6 +52,7 @@ object Library {
     const val glassfish = "org.glassfish:javax.annotation:${Version.glassfish}"
     const val spekDsl = "org.spekframework.spek2:spek-dsl-jvm:${Version.spek}"
     const val spekRunner = "org.spekframework.spek2:spek-runner-junit5:${Version.spek}"
+    const val mockk = "io.mockk:mockk:${Version.mockk}"
     const val clikt = "com.github.ajalt:clikt:${Version.clikt}"
 }
 
