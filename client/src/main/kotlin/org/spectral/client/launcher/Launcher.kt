@@ -21,7 +21,9 @@ import org.spectral.client.DaggerSpectralComponent
 import org.spectral.client.Spectral
 import org.spectral.client.SpectralComponent
 import org.spectral.launcher.SpectralLauncher
+import org.spectral.launcher.gui.LauncherApp
 import org.tinylog.kotlin.Logger
+import tornadofx.launch
 
 /**
  * Responsible for launching the Spectral Client.
@@ -49,6 +51,6 @@ object Launcher {
      * @param ctx LaunchContext
      */
     fun launch(ctx: LaunchContext) {
-
+        launch<LauncherApp>()
     }
 }
