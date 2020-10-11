@@ -1,5 +1,6 @@
 plugins {
     kotlin("kapt")
+    openjfx
     application
 }
 
@@ -19,6 +20,8 @@ dependencies {
     implementation(Library.dagger)
     implementation(Library.glassfish)
     implementation(Library.clikt)
+    implementation(Library.spectralLauncher)
+    implementation(Library.tornadofx)
 }
 
 val runtimeClasspath by configurations
@@ -45,6 +48,19 @@ val copyDependencyJars = tasks.register("copyDependencyJars", Copy::class) {
     finalizedBy(copyCompiledJar)
 }
 
-tasks.named("build") {
-    dependsOn()
+javafx {
+    version = "11"
+    modules = listOf("javafx.base", "javafx.fxml", "javafx.graphics", "javafx.controls", "javafx.swing")
+}
+
+val generateManifest = tasks.create("generateManifest", JavaExec::class) {
+    description = "Generates a manifest.xml for this client project."
+    group = "spectral"
+
+    dependsOn(copyDependencyJars)
+
+    main = "org.spectral.client.launcher.task.GenerateManifest"
+    classpath = sourceSets["main"].runtimeClasspath
+    args = listOf("https://archive.spectralpowered.org/latest/", "org.spectral.client.launcher.ClientLauncher", "${project.version}", "deps/", "bin/")
+    workingDir = projectDir
 }

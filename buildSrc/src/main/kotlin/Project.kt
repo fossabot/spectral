@@ -30,9 +30,11 @@ object Project {
 object Plugin {
     internal object Version {
         const val detekt = "1.14.1"
+        const val openjfx = "0.0.9"
     }
 
     const val detekt = "io.gitlab.arturbosch.detekt"
+    const val openjfx = "org.openjfx.javafxplugin"
 }
 
 object Library {
@@ -43,6 +45,8 @@ object Library {
         const val spek = "2.0.13"
         const val mockk = "1.10.2"
         const val clikt = "2.8.0"
+        const val spectralLauncher = "1.0.0"
+        const val tornadofx = "1.7.20"
     }
 
     const val tinylogApi = "org.tinylog:tinylog-api-kotlin:${Version.tinylog}"
@@ -54,8 +58,14 @@ object Library {
     const val spekRunner = "org.spekframework.spek2:spek-runner-junit5:${Version.spek}"
     const val mockk = "io.mockk:mockk:${Version.mockk}"
     const val clikt = "com.github.ajalt:clikt:${Version.clikt}"
+    const val spectralLauncher = "org.spectral.launcher:launcher:${Version.spectralLauncher}"
+    const val tornadofx = "no.tornado:tornadofx:${Version.tornadofx}"
 }
 
 val PluginDependenciesSpec.detekt: PluginDependencySpec get() {
     return id(Plugin.detekt) version Plugin.Version.detekt
+}
+
+val PluginDependenciesSpec.openjfx: PluginDependencySpec get() {
+    return id(Plugin.openjfx) version Plugin.Version.openjfx
 }

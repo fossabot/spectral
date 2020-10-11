@@ -15,40 +15,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.spectral.client.launcher
+package org.spectral.client.launcher.task
 
-import org.spectral.client.DaggerSpectralComponent
-import org.spectral.client.Spectral
-import org.spectral.client.SpectralComponent
-import org.spectral.launcher.SpectralLauncher
-import org.tinylog.kotlin.Logger
+import org.spectral.launcher.util.ManifestBuilder
 
-/**
- * Responsible for launching the Spectral Client.
- */
-object Launcher {
-    /**
-     * JVM static main method.
-     * Entrance into the the program.
-     *
-     * @param args Array<String>
-     */
+object GenerateManifest {
+
     @JvmStatic
     fun main(args: Array<String>) {
-        println("Initializing...")
-
-        /*
-         * Parse the command line arguments.
-         */
-        CommandLineParser().main(args)
+        ManifestBuilder.main(args)
     }
 
-    /**
-     * Launches the Spectral client.
-     *
-     * @param ctx LaunchContext
-     */
-    fun launch(ctx: LaunchContext) {
-
-    }
 }
