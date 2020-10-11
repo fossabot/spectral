@@ -44,3 +44,7 @@ val copyDependencyJars = tasks.register("copyDependencyJars", Copy::class) {
 
     finalizedBy(copyCompiledJar)
 }
+
+tasks.named("build") {
+    dependsOn()
+}
