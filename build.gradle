@@ -15,37 +15,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.spectral.client.launcher
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10' apply false
+}
 
-import org.spectral.launcher.gui.LauncherApp
-import tornadofx.launch
+apply from: 'versions.gradle'
 
-/**
- * Responsible for launching the Spectral Client.
- */
-object Launcher {
-    /**
-     * JVM static main method.
-     * Entrance into the the program.
-     *
-     * @param args Array<String>
-     */
-    @JvmStatic
-    fun main(args: Array<String>) {
-        println("Initializing...")
+wrapper {
+    gradleVersion = '6.6.1'
+}
 
-        /*
-         * Parse the command line arguments.
-         */
-        CommandLineParser().main(args)
+allprojects {
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+
+    group = 'org.spectral'
+    version = '1.0.0'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
     }
 
-    /**
-     * Launches the Spectral client.
-     *
-     * @param ctx LaunchContext
-     */
-    fun launch(ctx: LaunchContext) {
-        launch<LauncherApp>()
+    dependencies {
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+        implementation "org.tinylog:tinylog-api-kotlin:$tinylog"
+        implementation "org.tinylog:tinylog-impl:$tinylog"
+    }
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }

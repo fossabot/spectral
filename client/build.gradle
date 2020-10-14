@@ -15,37 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.spectral.client.launcher
+plugins {
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'org.jetbrains.kotlin.kapt'
+    id 'application'
+}
 
-import org.spectral.launcher.gui.LauncherApp
-import tornadofx.launch
+application {
+    mainClassName = "org.spectral.client.launcher.Launcher"
+}
 
-/**
- * Responsible for launching the Spectral Client.
- */
-object Launcher {
-    /**
-     * JVM static main method.
-     * Entrance into the the program.
-     *
-     * @param args Array<String>
-     */
-    @JvmStatic
-    fun main(args: Array<String>) {
-        println("Initializing...")
+dependencies {
+    kapt("com.google.dagger:dagger-compiler:$dagger")
+    implementation("com.google.dagger:dagger:$dagger")
+    implementation("org.glassfish:javax.annotation:$glassfish")
+    implementation("org.spectral.launcher:launcher:$spectralLauncher")
+    implementation("no.tornado:tornadofx:$tornadofx")
+    implementation("com.github.ajalt:clikt:$clikt")
+}
 
-        /*
-         * Parse the command line arguments.
-         */
-        CommandLineParser().main(args)
-    }
-
-    /**
-     * Launches the Spectral client.
-     *
-     * @param ctx LaunchContext
-     */
-    fun launch(ctx: LaunchContext) {
-        launch<LauncherApp>()
-    }
+javafx {
+    version = "11"
+    modules = ['javafx.base', 'javafx.controls', 'javafx.graphics', 'javafx.swing']
 }
