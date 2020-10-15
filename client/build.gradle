@@ -15,6 +15,7 @@ dependencies {
     implementation("org.glassfish:javax.annotation:$glassfish")
     implementation("no.tornado:tornadofx:$tornadofx")
     implementation("com.github.ajalt:clikt:$clikt")
+    implementation("org.spectral.launcher:launcher:$spectralLauncher")
 }
 
 javafx {
