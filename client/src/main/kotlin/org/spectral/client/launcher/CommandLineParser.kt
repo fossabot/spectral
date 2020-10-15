@@ -70,18 +70,12 @@ class CommandLineParser : CliktCommand(
      */
     override fun run() {
         /*
-         * Build the context instance
+         * TODO. Build the context instance
          */
-        val launchContext = LaunchContext(
-            verbose = this.verbose,
-            developerMode = this.developerMode,
-            forcedGamepackFile = this.forceGamepackFile,
-            jagexUrl = this.jagexUrl
-        )
 
         /*
          * Launch with the context
          */
-        Launcher.launch(launchContext)
+        Launcher.launch()
     }
 }

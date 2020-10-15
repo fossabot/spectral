@@ -29,7 +29,6 @@ dependencies {
     kapt("com.google.dagger:dagger-compiler:$dagger")
     implementation("com.google.dagger:dagger:$dagger")
     implementation("org.glassfish:javax.annotation:$glassfish")
-    implementation("org.spectral.launcher:launcher:$spectralLauncher")
     implementation("no.tornado:tornadofx:$tornadofx")
     implementation("com.github.ajalt:clikt:$clikt")
 }

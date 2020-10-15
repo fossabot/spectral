@@ -3,6 +3,5 @@ ext {
     dagger = "2.29.1"
     glassfish = "3.1.1"
     clikt = "2.8.0"
-    spectralLauncher = "1.0.0"
     tornadofx = "1.7.20"
 }

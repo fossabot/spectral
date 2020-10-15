@@ -17,9 +17,6 @@
 
 package org.spectral.client.launcher
 
-import org.spectral.launcher.gui.LauncherApp
-import tornadofx.launch
-
 /**
  * Responsible for launching the Spectral Client.
  */
@@ -41,11 +38,9 @@ object Launcher {
     }
 
     /**
-     * Launches the Spectral client.
-     *
-     * @param ctx LaunchContext
+     * Launches the Spectral client application launcher.
      */
-    fun launch(ctx: LaunchContext) {
-        launch<LauncherApp>()
+    fun launch() {
+        
     }
 }

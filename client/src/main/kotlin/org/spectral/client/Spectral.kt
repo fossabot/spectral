@@ -50,7 +50,7 @@ class Spectral @Inject constructor() {
          */
         this.init()
 
-        Logger.info("Starting client.")
+        Logger.info("Starting Spectral client.")
 
         /*
          * Start the client.
