@@ -1,0 +1,31 @@
+name: deployment
+on:
+  release:
+    types: [published]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 14
+      - run: chmod +x gradlew
+      - run: ./gradlew build -x test
+      - run: ./gradlew generateManifest
+      - name: Deploy to Archive Server
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ARCHIVE_SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "client/build/manifest/"
+          REMOTE_HOST: ${{ secrets.ARCHIVE_REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.ARCHIVE_REMOTE_USER }}
+          REMOTE_PORT: ${{ secrets.ARCHIVE_REMOTE_PORT }}
+          TARGET: ${{ secrets.ARCHIVE_TARGET }}
+      - uses: sarisia/actions-status-discord
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_ACTIONS_WEBHOOK }}
+          username: Spectral
+          avatar_url: https://i.imgur.com/po5P2l9.png
