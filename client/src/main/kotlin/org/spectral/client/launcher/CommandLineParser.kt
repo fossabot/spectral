@@ -72,10 +72,5 @@ class CommandLineParser : CliktCommand(
         /*
          * TODO. Build the context instance
          */
-
-        /*
-         * Launch with the context
-         */
-        Launcher.launch()
     }
 }

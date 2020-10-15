@@ -17,30 +17,22 @@
 
 package org.spectral.client.launcher
 
+import org.spectral.launcher.AbstractLauncher
+
 /**
  * Responsible for launching the Spectral Client.
  */
-object Launcher {
-    /**
-     * JVM static main method.
-     * Entrance into the the program.
-     *
-     * @param args Array<String>
-     */
-    @JvmStatic
-    fun main(args: Array<String>) {
-        println("Initializing...")
+class Launcher : AbstractLauncher() {
 
-        /*
-         * Parse the command line arguments.
+    companion object {
+        /**
+         * The JVM static entry into launching the spectral client.
+         *
+         * @param args Array<String>
          */
-        CommandLineParser().main(args)
-    }
+        @JvmStatic
+        fun main(args: Array<String>) {
 
-    /**
-     * Launches the Spectral client application launcher.
-     */
-    fun launch() {
-        
+        }
     }
 }

@@ -29,7 +29,7 @@ allprojects {
     apply plugin: 'org.jetbrains.kotlin.jvm'
 
     group = 'org.spectral'
-    version = '1.0.1'
+    version = '1.0.0'
 
     repositories {
         mavenLocal()
