@@ -17,40 +17,22 @@
 
 package org.spectral.client.launcher
 
-import org.spectral.client.DaggerSpectralComponent
-import org.spectral.client.Spectral
-import org.spectral.client.SpectralComponent
-import org.spectral.launcher.SpectralLauncher
-import org.spectral.launcher.gui.LauncherApp
-import org.tinylog.kotlin.Logger
-import tornadofx.launch
+import org.spectral.launcher.AbstractLauncher
 
 /**
  * Responsible for launching the Spectral Client.
  */
-object Launcher {
-    /**
-     * JVM static main method.
-     * Entrance into the the program.
-     *
-     * @param args Array<String>
-     */
-    @JvmStatic
-    fun main(args: Array<String>) {
-        println("Initializing...")
+class Launcher : AbstractLauncher() {
 
-        /*
-         * Parse the command line arguments.
+    companion object {
+        /**
+         * The JVM static entry into launching the spectral client.
+         *
+         * @param args Array<String>
          */
-        CommandLineParser().main(args)
-    }
+        @JvmStatic
+        fun main(args: Array<String>) {
 
-    /**
-     * Launches the Spectral client.
-     *
-     * @param ctx LaunchContext
-     */
-    fun launch(ctx: LaunchContext) {
-        launch<LauncherApp>()
+        }
     }
 }

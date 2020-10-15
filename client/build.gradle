@@ -1,0 +1,50 @@
+plugins {
+    id 'org.spectral.launcher.plugin' version '1.0.1'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'org.jetbrains.kotlin.kapt'
+    id 'application'
+}
+
+application {
+    mainClassName = "org.spectral.client.launcher.Launcher"
+}
+
+dependencies {
+    kapt("com.google.dagger:dagger-compiler:$dagger")
+    implementation("com.google.dagger:dagger:$dagger")
+    implementation("org.glassfish:javax.annotation:$glassfish")
+    implementation("no.tornado:tornadofx:$tornadofx")
+    implementation("com.github.ajalt:clikt:$clikt")
+}
+
+javafx {
+    version = "11"
+    modules = ['javafx.base', 'javafx.controls', 'javafx.graphics', 'javafx.swing']
+}
+
+task copyJar(type: Copy) {
+    from tasks.jar
+    into 'build/manifest/'
+}
+
+task copyRuntimeDependencies(type: Copy) {
+    doFirst {
+        project.buildDir.toPath().resolve("manifest").deleteDir()
+        project.buildDir.toPath().resolve("manifest").toFile().mkdirs()
+    }
+
+    from configurations.runtimeClasspath
+    into 'build/manifest/'
+
+    finalizedBy(copyJar)
+}
+
+generateManifest {
+    dependsOn(copyRuntimeDependencies)
+
+    version = project.version
+    uri = "https://archive.spectralpowered.org/latest/"
+    launcherClass = "org.spectral.client.launcher.Launcher"
+    cacheDir = "bin/"
+    outputDir = project.buildDir.toPath().resolve("manifest").toFile()
+}

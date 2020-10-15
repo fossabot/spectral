@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url 'https://repo.spectralpowered.org/' }
+    }
+}
+
+rootProject.name = 'spectral'
+
+include(":client")

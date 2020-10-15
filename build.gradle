@@ -15,15 +15,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.spectral.client.launcher.task
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10' apply false
+}
 
-import org.spectral.launcher.util.ManifestBuilder
+apply from: 'versions.gradle'
 
-object GenerateManifest {
+wrapper {
+    gradleVersion = '6.6.1'
+}
 
-    @JvmStatic
-    fun main(args: Array<String>) {
-        ManifestBuilder.main(args)
+allprojects {
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+
+    group = 'org.spectral'
+    version = '1.0.0'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
     }
 
+    dependencies {
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+        implementation "org.tinylog:tinylog-api-kotlin:$tinylog"
+        implementation "org.tinylog:tinylog-impl:$tinylog"
+    }
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_14.toString()
+    }
 }

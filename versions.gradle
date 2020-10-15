@@ -1,0 +1,7 @@
+ext {
+    tinylog = "2.1.2"
+    dagger = "2.29.1"
+    glassfish = "3.1.1"
+    clikt = "2.8.0"
+    tornadofx = "1.7.20"
+}
