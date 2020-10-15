@@ -23,7 +23,7 @@ jobs:
           REMOTE_USER: ${{ secrets.ARCHIVE_REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.ARCHIVE_REMOTE_PORT }}
           TARGET: ${{ secrets.ARCHIVE_TARGET }}
-      - uses: sarisia/actions-status-discord
+      - uses: sarisia/actions-status-discord@v1
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_ACTIONS_WEBHOOK }}
