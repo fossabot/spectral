@@ -15,53 +15,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.spectral.client
+package org.spectral.client.gui
 
-import org.spectral.client.gui.Gui
 import org.tinylog.kotlin.Logger
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * The main Spectral Client object.
- * This class is where all the magic starts.
+ * The controller for managing the Spectral client GUI.
  */
 @Singleton
-class Spectral @Inject constructor() {
+class Gui @Inject constructor() {
 
     /**
-     * The spectral client GUI controller.
+     * The injected client window controller.
      */
     @Inject
-    internal lateinit var gui: Gui
+    internal lateinit var clientWindow: ClientWindow
 
     /**
-     * The pre-start initialization.
-     */
-    private fun init() {
-        Logger.info("Running pre-flight initialization.")
-
-        /*
-         * Spectral initialization stuff
-         */
-
-        Logger.info("Completed pre-flight initialization.")
-    }
-
-    /**
-     * Start the spectral client.
+     * Starts / shows the spectral client GUI.
      */
     fun start() {
-        /*
-         * Do pre-flight initialization
-         */
-        this.init()
-
-        Logger.info("Starting Spectral client.")
+        Logger.info("Starting Spectral client GUI.")
 
         /*
-         * Start the client.
+         * Create the main Spectral client window.
          */
-        gui.start()
+        if(clientWindow.created) {
+            Logger.error("Unable to open multiple root client windows.")
+        } else {
+            clientWindow.create()
+        }
     }
 }

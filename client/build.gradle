@@ -5,17 +5,18 @@ plugins {
     id 'application'
 }
 
-application {
+run {
     mainClassName = "org.spectral.client.launcher.Launcher"
 }
 
 dependencies {
-    kapt("com.google.dagger:dagger-compiler:$dagger")
-    implementation("com.google.dagger:dagger:$dagger")
-    implementation("org.glassfish:javax.annotation:$glassfish")
-    implementation("no.tornado:tornadofx:$tornadofx")
-    implementation("com.github.ajalt:clikt:$clikt")
-    implementation("org.spectral.launcher:launcher:$spectralLauncher")
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+    implementation "com.google.dagger:dagger:$dagger"
+    implementation "org.glassfish:javax.annotation:$glassfish"
+    implementation "no.tornado:tornadofx:$tornadofx"
+    implementation "com.github.ajalt:clikt:$clikt"
+    implementation "org.spectral.launcher:launcher:$spectralLauncher"
+    implementation "com.github.weisj:darklaf-core:$darklaf"
 }
 
 javafx {
@@ -44,7 +45,7 @@ generateManifest {
     dependsOn(copyRuntimeDependencies)
 
     version = project.version
-    uri = "https://archive.spectralpowered.org/latest/"
+    uri = "http://archive.spectralpowered.org/latest/"
     launcherClass = "org.spectral.client.launcher.Launcher"
     cacheDir = "bin/"
     outputDir = project.buildDir.toPath().resolve("manifest").toFile()
