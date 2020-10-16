@@ -17,12 +17,33 @@
 
 package org.spectral.client.launcher
 
+import org.spectral.client.DaggerSpectralComponent
 import org.spectral.launcher.AbstractLauncher
+import org.tinylog.kotlin.Logger
 
 /**
  * Responsible for launching the Spectral Client.
  */
 class Launcher : AbstractLauncher() {
+
+    override fun onLaunch() {
+        Logger.info("Preparing the Spectral client.")
+    }
+
+    override fun onComplete() {
+        Logger.info("Spectral client has finished pre-flight launch.")
+
+    }
+
+    internal fun startClient() {
+        val component = DaggerSpectralComponent.create()
+        val spectral = component.spectral
+
+        /*
+         * Start the spectral client.
+         */
+        spectral.start()
+    }
 
     companion object {
         /**
@@ -32,7 +53,7 @@ class Launcher : AbstractLauncher() {
          */
         @JvmStatic
         fun main(args: Array<String>) {
-
+            Launcher().startClient()
         }
     }
 }
