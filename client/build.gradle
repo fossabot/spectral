@@ -44,7 +44,7 @@ generateManifest {
     dependsOn(copyRuntimeDependencies)
 
     version = project.version
-    uri = "https://archive.spectralpowered.org/latest/"
+    uri = "http://archive.spectralpowered.org/latest/"
     launcherClass = "org.spectral.client.launcher.Launcher"
     cacheDir = "bin/"
     outputDir = project.buildDir.toPath().resolve("manifest").toFile()
