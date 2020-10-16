@@ -27,7 +27,7 @@ import com.github.weisj.darklaf.theme.info.PresetIconRule
 class SpectralTheme : Theme() {
 
     override fun getResourcePath(): String {
-        return "theme/"
+        return "/theme/"
     }
 
     override fun getPrefix(): String {

@@ -43,6 +43,18 @@ class ClientWindow @Inject constructor() {
      */
     private lateinit var frame: JFrame
 
+    var width: Int
+        get() = frame.width
+        set(value) {
+            frame.setSize(value, height)
+        }
+
+    var height: Int
+        get() = frame.height
+        set(value) {
+            frame.setSize(width, value)
+        }
+
     /**
      * Creates and display the main Spectral client window.
      */
@@ -50,7 +62,7 @@ class ClientWindow @Inject constructor() {
         Logger.info("Creating root client window.")
 
         SwingUtilities.invokeLater {
-            LafManager.install()
+            LafManager.install(SpectralTheme())
 
             /*
              * Build the Java Swing frame.
@@ -65,7 +77,7 @@ class ClientWindow @Inject constructor() {
 
             frame.setLocationRelativeTo(null)
             frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-            frame.isVisible = true
+            this.frame.isVisible = true
         }
     }
 }

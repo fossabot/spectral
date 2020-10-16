@@ -28,13 +28,17 @@ class Launcher : AbstractLauncher() {
 
     override fun onLaunch() {
         Logger.info("Preparing the Spectral client.")
+        this.complete()
     }
 
     override fun onComplete() {
         Logger.info("Spectral client has finished pre-flight launch.")
-
+        this.startClient()
     }
 
+    /**
+     * Starts the spectral client.
+     */
     internal fun startClient() {
         val component = DaggerSpectralComponent.create()
         val spectral = component.spectral
