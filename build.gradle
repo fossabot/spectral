@@ -1,5 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.10' apply false
+    id 'io.gitlab.arturbosch.detekt' version '1.14.1' apply false
 }
 
 apply from: 'versions.gradle'
@@ -10,6 +11,7 @@ wrapper {
 
 allprojects {
     apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'io.gitlab.arturbosch.detekt'
 
     group = 'org.spectral'
     version = '1.0.1'
@@ -41,4 +43,11 @@ allprojects {
     compileKotlin {
         kotlinOptions.jvmTarget = JavaVersion.VERSION_14.toString()
     }
+
+    detekt {
+        failFast = true
+        config = files("${rootProject.projectDir}/detekt/config.yml")
+    }
+
+    tasks.detekt.jvmTarget = JavaVersion.VERSION_14.toString()
 }
