@@ -18,7 +18,9 @@
 package org.spectral.client.launcher
 
 import org.spectral.client.DaggerSpectralComponent
+import org.spectral.client.directory.DirectoryVerifier
 import org.spectral.launcher.AbstractLauncher
+import org.spectral.launcher.SpectralLauncher
 import org.tinylog.kotlin.Logger
 
 /**
@@ -31,7 +33,11 @@ class Launcher : AbstractLauncher() {
      * this client.
      */
     override fun onLaunch() {
-        // TODO Launch stuff
+        /*
+         * Create any missing data directories.
+         */
+        this.initDirectories()
+
         this.complete()
     }
 
@@ -40,29 +46,22 @@ class Launcher : AbstractLauncher() {
      */
     override fun onComplete() {
         Logger.info("Completed launch sequence. Starting Spectral client.")
-        startSpectral()
+    }
+
+    private fun initDirectories() {
+        Logger.info("Initializing data directories.")
+
+        this.addProgress(0.1)
+        this.updateStatus("Scanning data directories...")
+
+        DirectoryVerifier().createMissing()
     }
 
     companion object {
 
-        private val component = DaggerSpectralComponent.create()
-        private val spectral = component.spectral
-
-        /**
-         * Starts the spectral client.
-         */
-        internal fun startSpectral() {
-            Logger.info("Preparing Spectral client...")
-
-            /*
-             * Start spectral
-             */
-            spectral.start()
-        }
-
         @JvmStatic
         fun main(args: Array<String>) {
-            this.startSpectral()
+            SpectralLauncher.lau
         }
     }
 }

@@ -10,6 +10,7 @@ run {
 }
 
 dependencies {
+    implementation project(":util")
     kapt "com.google.dagger:dagger-compiler:$dagger"
     implementation "com.google.dagger:dagger:$dagger"
     implementation "org.glassfish:javax.annotation:$glassfish"
