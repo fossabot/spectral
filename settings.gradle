@@ -10,3 +10,5 @@ pluginManagement {
 rootProject.name = 'spectral'
 
 include(":client")
+include(":common")
+include(":util")
