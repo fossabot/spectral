@@ -6,4 +6,6 @@ ext {
     tornadofx = "1.7.20"
     spectralLauncher = "1.0.3"
     darklaf = "2.4.10"
+    spek = "2.0.13"
+    mockk = "1.10.2"
 }
