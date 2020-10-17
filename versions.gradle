@@ -4,7 +4,7 @@ ext {
     glassfish = "3.1.1"
     clikt = "2.8.0"
     tornadofx = "1.7.20"
-    spectralLauncher = "1.0.3"
+    spectralLauncher = "1.0.4"
     darklaf = "2.4.10"
     spek = "2.0.13"
     mockk = "1.10.2"
