@@ -37,7 +37,6 @@ class Launcher : AbstractLauncher() {
          * Create any missing data directories.
          */
         this.initDirectories()
-
         this.complete()
     }
 
@@ -46,6 +45,14 @@ class Launcher : AbstractLauncher() {
      */
     override fun onComplete() {
         Logger.info("Completed launch sequence. Starting Spectral client.")
+
+        val component = DaggerSpectralComponent.create()
+        val spectral = component.spectral
+
+        /*
+         * Start the spectral client.
+         */
+        spectral.start()
     }
 
     private fun initDirectories() {
@@ -61,7 +68,13 @@ class Launcher : AbstractLauncher() {
 
         @JvmStatic
         fun main(args: Array<String>) {
-            SpectralLauncher.lau
+            val launcher = Launcher()
+
+            /*
+             * Start the spectral launcher with a declared
+             * launcher implementation.
+             */
+            SpectralLauncher.launch(launcher)
         }
     }
 }
