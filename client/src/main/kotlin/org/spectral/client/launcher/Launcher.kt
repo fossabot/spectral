@@ -22,42 +22,47 @@ import org.spectral.launcher.AbstractLauncher
 import org.tinylog.kotlin.Logger
 
 /**
- * Responsible for launching the Spectral Client.
+ * The spectral launcher implementation.
  */
 class Launcher : AbstractLauncher() {
 
+    /**
+     * Invoked when the launcher hands off the launch logic to
+     * this client.
+     */
     override fun onLaunch() {
-        Logger.info("Preparing the Spectral client.")
+        // TODO Launch stuff
         this.complete()
     }
 
-    override fun onComplete() {
-        Logger.info("Spectral client has finished pre-flight launch.")
-        this.startClient()
-    }
-
     /**
-     * Starts the spectral client.
+     * Invoked when the launch is completed.
      */
-    internal fun startClient() {
-        val component = DaggerSpectralComponent.create()
-        val spectral = component.spectral
-
-        /*
-         * Start the spectral client.
-         */
-        spectral.start()
+    override fun onComplete() {
+        Logger.info("Completed launch sequence. Starting Spectral client.")
+        startSpectral()
     }
 
     companion object {
+
+        private val component = DaggerSpectralComponent.create()
+        private val spectral = component.spectral
+
         /**
-         * The JVM static entry into launching the spectral client.
-         *
-         * @param args Array<String>
+         * Starts the spectral client.
          */
+        internal fun startSpectral() {
+            Logger.info("Preparing Spectral client...")
+
+            /*
+             * Start spectral
+             */
+            spectral.start()
+        }
+
         @JvmStatic
         fun main(args: Array<String>) {
-            Launcher().startClient()
+            this.startSpectral()
         }
     }
 }

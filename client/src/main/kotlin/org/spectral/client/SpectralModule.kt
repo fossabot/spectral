@@ -19,9 +19,7 @@ package org.spectral.client
 
 import dagger.Module
 
-/**
- * The dependency injector module for the spectral client.
- */
 @Module
 class SpectralModule {
+
 }

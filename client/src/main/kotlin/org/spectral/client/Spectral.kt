@@ -17,51 +17,27 @@
 
 package org.spectral.client
 
-import org.spectral.client.gui.Gui
 import org.tinylog.kotlin.Logger
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * The main Spectral Client object.
- * This class is where all the magic starts.
+ * The main manager class for the Spectral client.
  */
 @Singleton
 class Spectral @Inject constructor() {
 
     /**
-     * The spectral client GUI controller.
+     * Starts the spectral client.
      */
-    @Inject
-    internal lateinit var gui: Gui
-
-    /**
-     * The pre-start initialization.
-     */
-    private fun init() {
-        Logger.info("Running pre-flight initialization.")
-
-        /*
-         * Spectral initialization stuff
-         */
-
-        Logger.info("Completed pre-flight initialization.")
+    fun start() {
+        Logger.info("Starting Spectral client...")
     }
 
     /**
-     * Start the spectral client.
+     * Stops the spectral client.
      */
-    fun start() {
-        /*
-         * Do pre-flight initialization
-         */
-        this.init()
-
-        Logger.info("Starting Spectral client.")
-
-        /*
-         * Start the client.
-         */
-        gui.start()
+    fun stop() {
+        Logger.info("Stopping Spectral client...")
     }
 }

@@ -21,15 +21,15 @@ import dagger.Component
 import javax.inject.Singleton
 
 /**
- * The dependency injector component for creating an
- * instance of the spectral object to start the client.
+ * The spectral dependency injector component.
  */
 @Component(modules = [SpectralModule::class])
 @Singleton
 interface SpectralComponent {
 
     /**
-     * The spectral object singleton instance.
+     * The spectral instance.
      */
     val spectral: Spectral
+
 }
