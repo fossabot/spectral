@@ -28,6 +28,16 @@ import org.tinylog.kotlin.Logger
 class Launcher : AbstractLauncher() {
 
     /**
+     * The dependency injector component.
+     */
+    val component = DaggerSpectralComponent.create()
+
+    /**
+     * The main spectral object singleton instance.
+     */
+    val spectral = component.spectral
+
+    /**
      * Invoked when the launcher hands off the launch logic to
      * this client.
      */
@@ -36,6 +46,12 @@ class Launcher : AbstractLauncher() {
          * Create any missing data directories.
          */
         this.initDirectories()
+
+        /*
+         * Download the latest Jagex Config
+         */
+        this.initJavConfig()
+
         this.complete()
     }
 
@@ -44,9 +60,6 @@ class Launcher : AbstractLauncher() {
      */
     override fun onComplete() {
         Logger.info("Completed launch sequence. Starting Spectral client.")
-
-        val component = DaggerSpectralComponent.create()
-        val spectral = component.spectral
 
         /*
          * Start the spectral client.
@@ -61,6 +74,15 @@ class Launcher : AbstractLauncher() {
         this.updateStatus("Scanning data directories...")
 
         DirectoryManager.verify(true)
+    }
+
+    private fun initJavConfig() {
+        Logger.info("Fetching latest JAV_CONFIG.")
+
+        this.addProgress(0.1)
+        this.updateStatus("Fetching Jagex JAV_CONFIG...")
+
+
     }
 
     companion object {
