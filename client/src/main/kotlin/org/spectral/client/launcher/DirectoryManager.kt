@@ -15,28 +15,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.spectral.client.directory
+package org.spectral.client.launcher
 
 import org.spectral.util.SpectralPaths
 import java.nio.file.Files
-import java.nio.file.Path
 
-/**
- * Represents a directory resolved for the current system platform.
- */
-class PlatformDirectory(basePath: String) : Creatable {
+object DirectoryManager {
 
     /**
-     * The platform resolved path of this directory.
+     * The sub directories that need to exist for the client to run.
      */
-    val path: Path = SpectralPaths.basePath.resolve(basePath)
+    private val dirs = arrayOf("bin", "gamepack", "config", "plugins", "logs", "mappings")
 
-    override fun exists(): Boolean {
-        return Files.exists(this.path)
+    /**
+     * Verifies that all of the directories exist.
+     *
+     * @param create Create missing directories. [Boolean]
+     * @return Boolean
+     */
+    fun verify(create: Boolean = false): Boolean {
+        dirs.forEach { dir ->
+            val path = SpectralPaths.basePath.resolve(dir)
+
+            if(!Files.exists(path)) {
+                if(!create) {
+                    return false
+                } else {
+                    Files.createDirectories(path)
+                }
+            }
+        }
+
+        return true
     }
-
-    override fun create() {
-        Files.createDirectories(this.path)
-    }
-
 }

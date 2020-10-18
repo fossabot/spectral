@@ -18,7 +18,6 @@
 package org.spectral.client.launcher
 
 import org.spectral.client.DaggerSpectralComponent
-import org.spectral.client.directory.DirectoryVerifier
 import org.spectral.launcher.AbstractLauncher
 import org.spectral.launcher.SpectralLauncher
 import org.tinylog.kotlin.Logger
@@ -61,7 +60,7 @@ class Launcher : AbstractLauncher() {
         this.addProgress(0.1)
         this.updateStatus("Scanning data directories...")
 
-        DirectoryVerifier().createMissing()
+        DirectoryManager.verify(true)
     }
 
     companion object {
