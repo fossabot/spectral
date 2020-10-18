@@ -20,7 +20,9 @@ package org.spectral.client.launcher
 import org.spectral.client.DaggerSpectralComponent
 import org.spectral.launcher.AbstractLauncher
 import org.spectral.launcher.SpectralLauncher
+import org.spectral.util.SpectralPaths
 import org.tinylog.kotlin.Logger
+import java.net.URI
 
 /**
  * The spectral launcher implementation.
@@ -52,7 +54,12 @@ class Launcher : AbstractLauncher() {
          */
         this.initJavConfig()
 
-        this.complete()
+        /*
+         * Download the latest Jagex Gamepack
+         */
+        this.downloadGamepack()
+
+        //this.complete()
     }
 
     /**
@@ -82,7 +89,22 @@ class Launcher : AbstractLauncher() {
         this.addProgress(0.1)
         this.updateStatus("Fetching Jagex JAV_CONFIG...")
 
+        /*
+         * Parse the jav config from the singleton object.
+         */
+        component.javConfig.parse()
+    }
 
+    private fun downloadGamepack() {
+        Logger.info("Downloading latest Jagex gamepack.")
+
+        val uri = URI.create("http://oldschool1.runescape.com/gamepack.jar")
+        val path = SpectralPaths.basePath.resolve("gamepack").resolve("gamepack.jar")
+
+        /*
+         * Start the download.
+         */
+        GamepackDownloader.downloadGamepack(uri, path, this)
     }
 
     companion object {

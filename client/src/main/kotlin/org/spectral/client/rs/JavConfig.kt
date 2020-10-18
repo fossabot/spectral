@@ -39,7 +39,7 @@ class JavConfig @Inject constructor() {
      *
      * @param url URL
      */
-    fun parse(url: URL = URL(JAGEX_URL)) {
+    fun parse(url: URL = URL(JAGEX_URL + "jav_config.ws")) {
         Logger.info("Downloaing Jagex jav_config from '$JAGEX_URL'.")
 
         val lines = url.readText().split("\n")
@@ -79,6 +79,6 @@ class JavConfig @Inject constructor() {
         /**
          * The Jagex URL to download the config path from.
          */
-        const val JAGEX_URL = "http://oldschool.runescape.com/"
+        const val JAGEX_URL = "http://oldschool1.runescape.com/"
     }
 }

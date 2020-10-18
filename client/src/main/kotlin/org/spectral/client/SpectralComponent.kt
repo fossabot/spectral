@@ -18,6 +18,7 @@
 package org.spectral.client
 
 import dagger.Component
+import org.spectral.client.rs.JavConfig
 import javax.inject.Singleton
 
 /**
@@ -32,4 +33,8 @@ interface SpectralComponent {
      */
     val spectral: Spectral
 
+    /**
+     * The Jagex JavConfig singleton instance.
+     */
+    val javConfig: JavConfig
 }

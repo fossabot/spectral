@@ -30,7 +30,7 @@ object SpectralPaths {
      * The base spectral directory path for the current platform.
      */
     val basePath: Path get() {
-        this.resolvePath(Paths.get("spectral/"), Platform.current()).apply {
+        this.resolvePath(Paths.get(""), Platform.current()).apply {
             if(!Files.exists(this)) {
                 Files.createDirectories(this)
             }
