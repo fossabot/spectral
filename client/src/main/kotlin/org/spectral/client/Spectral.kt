@@ -17,6 +17,7 @@
 
 package org.spectral.client
 
+import org.tinylog.kotlin.Logger
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,5 +27,17 @@ import javax.inject.Singleton
 @Singleton
 class Spectral @Inject constructor() {
 
+    /**
+     * Starts the spectral client
+     */
+    fun start() {
+        Logger.info("Starting the Spectral client...")
+    }
 
+    /**
+     * Stops the spectral client.
+     */
+    fun stop() {
+
+    }
 }
