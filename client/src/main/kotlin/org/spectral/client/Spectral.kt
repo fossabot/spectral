@@ -22,22 +22,22 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * The main manager class for the Spectral client.
+ * Represents the main spectral singleton acting as the controller / manager for the client.
  */
 @Singleton
 class Spectral @Inject constructor() {
 
     /**
-     * Starts the spectral client.
+     * Starts the spectral client
      */
     fun start() {
-        Logger.info("Starting Spectral client...")
+        Logger.info("Starting the Spectral client...")
     }
 
     /**
      * Stops the spectral client.
      */
     fun stop() {
-        Logger.info("Stopping Spectral client...")
+
     }
 }

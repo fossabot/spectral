@@ -18,106 +18,50 @@
 package org.spectral.client.launcher
 
 import org.spectral.client.DaggerSpectralComponent
+import org.spectral.client.Spectral
 import org.spectral.launcher.AbstractLauncher
-import org.spectral.launcher.SpectralLauncher
-import org.spectral.util.SpectralPaths
 import org.tinylog.kotlin.Logger
-import java.net.URI
 
-/**
- * The spectral launcher implementation.
- */
 class Launcher : AbstractLauncher() {
 
     /**
-     * The dependency injector component.
+     * The spectral dependency injector component.
      */
-    val component = DaggerSpectralComponent.create()
+    internal val component = DaggerSpectralComponent.create()
 
     /**
      * The main spectral object singleton instance.
      */
-    val spectral = component.spectral
+    internal val spectral: Spectral = component.spectral
 
-    /**
-     * Invoked when the launcher hands off the launch logic to
-     * this client.
-     */
     override fun onLaunch() {
-        /*
-         * Create any missing data directories.
-         */
-        this.initDirectories()
+        Logger.info("Preparing the Spectral client.")
 
         /*
-         * Download the latest Jagex Config
+         * Do spectral client launch stuff here.
          */
-        this.initJavConfig()
 
-        /*
-         * Download the latest Jagex Gamepack
-         */
-        this.downloadGamepack()
-
-        //this.complete()
+        this.complete()
     }
 
-    /**
-     * Invoked when the launch is completed.
-     */
     override fun onComplete() {
-        Logger.info("Completed launch sequence. Starting Spectral client.")
+        Logger.info("Spectral launcher has completed. Starting client...")
 
         /*
-         * Start the spectral client.
+         * Start the spectral client from the singleton [Spectral] instance.
          */
         spectral.start()
     }
 
-    private fun initDirectories() {
-        Logger.info("Initializing data directories.")
-
-        this.addProgress(0.1)
-        this.updateStatus("Scanning data directories...")
-
-        DirectoryManager.verify(true)
-    }
-
-    private fun initJavConfig() {
-        Logger.info("Fetching latest JAV_CONFIG.")
-
-        this.addProgress(0.1)
-        this.updateStatus("Fetching Jagex JAV_CONFIG...")
-
-        /*
-         * Parse the jav config from the singleton object.
-         */
-        component.javConfig.parse()
-    }
-
-    private fun downloadGamepack() {
-        Logger.info("Downloading latest Jagex gamepack.")
-
-        val uri = URI.create("http://oldschool1.runescape.com/gamepack.jar")
-        val path = SpectralPaths.basePath.resolve("gamepack").resolve("gamepack.jar")
-
-        /*
-         * Start the download.
-         */
-        GamepackDownloader.downloadGamepack(uri, path, this)
-    }
-
     companion object {
-
+        /**
+         * Main static method for starting the spectral client.
+         * @param args Array<String>
+         */
         @JvmStatic
         fun main(args: Array<String>) {
             val launcher = Launcher()
-
-            /*
-             * Start the spectral launcher with a declared
-             * launcher implementation.
-             */
-            SpectralLauncher.launch(launcher)
+            launcher.onLaunch()
         }
     }
 }

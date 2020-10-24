@@ -18,23 +18,19 @@
 package org.spectral.client
 
 import dagger.Component
-import org.spectral.client.rs.JavConfig
 import javax.inject.Singleton
 
 /**
- * The spectral dependency injector component.
+ * The Spectral dependency injector component which provides
+ * the initial singleton.
  */
-@Component(modules = [SpectralModule::class])
+@Component(modules = [])
 @Singleton
 interface SpectralComponent {
 
     /**
-     * The spectral instance.
+     * The [Spectral] singleton instance.
      */
     val spectral: Spectral
 
-    /**
-     * The Jagex JavConfig singleton instance.
-     */
-    val javConfig: JavConfig
 }
